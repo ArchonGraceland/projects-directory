@@ -519,6 +519,7 @@
 <div class="admin-banner">
   <span>⬡ Admin mode active</span>
   <span style="opacity:0.5">Hover any card to edit · Use + Add Project to create new</span>
+  <button class="admin-btn" onclick="resetToDefaults()" style="margin-left:auto;font-size:0.6rem;padding:0.3rem 0.8rem;border-color:rgba(139,26,26,0.4);color:var(--crimson);">↺ Reset to Defaults</button>
 </div>
 
 <!-- HEADER -->
@@ -643,15 +644,20 @@ const STORAGE_KEY    = 'portfolio_v2';
 //  DEFAULT DATA
 // ─────────────────────────────────────
 const DEFAULTS = [
-  { id:'curley',    title:'The Global',       titleEm:'Curley Effect',            tag:'research',  status:'live',  meta:'HTML · Vercel · 2025',         url:'', desc:"Harvard Economics job market paper. Develops a Curley Vulnerability Index measuring U.S. states' susceptibility to politicians using wasteful redistribution to reshape electorates through selective outmigration. State-level panel, 44 states × 5 elections, 2004–2020." },
-  { id:'hegemonic', title:'Hegemonic',         titleEm:'Institutional Framework',  tag:'research',  status:'live',  meta:'HTML · 2025',                   url:'', desc:'Companion theoretical paper exploring how the American alliance system creates systematic economic asymmetries. Integrates the Global CVI as Part VII of a larger framework on hegemonic institutions.' },
+
+
   { id:'mindload',  title:'MindLoad',          titleEm:'Catholic Formation',       tag:'formation', status:'live',  meta:'HTML · Sessions A–W · 2024–25', url:'', desc:'Comprehensive integral development program combining physical training (BJJ, resistance), cognitive disciplines (rhetoric, legal reasoning, music, language), and spiritual formation structured around the liturgical year.' },
   { id:'ancilla',   title:'MindLoad',          titleEm:'Ancilla',                  tag:'formation', status:'wip',   meta:'HTML · 2025',                   url:'', desc:"Women's formation framework parallel to MindLoad. A structured program of Catholic integral development adapted for feminine formation, rooted in the same liturgical calendar and tiered discipline system." },
   { id:'kafka',     title:'Metamorphosis',     titleEm:'Reader',                   tag:'app',       status:'live',  meta:'React JSX · 2024',              url:'', desc:"Interactive deep-reading app for Kafka's Metamorphosis. Split-screen layout with marginalia, annotations, and inline word definitions. Built for close reading practice." },
-  { id:'spy',       title:'SPY Options',       titleEm:'Calculator',               tag:'tool',      status:'live',  meta:'HTML/JS · 2024',                url:'', desc:'Financial modeling tool with Kelly Criterion position sizing and Value at Risk (VaR) calculations for SPY options trading.' },
+
   { id:'crowd',     title:'CROWD',             titleEm:'Dialogic Tutor',           tag:'app',       status:'live',  meta:'Streamlit · Python · 2024',     url:'', desc:'Streamlit-based analytical reading comprehension tutor with accessibility accommodations. Implements a Socratic dialogue method for close reading.' },
   { id:'language',  title:'Language Learning', titleEm:'Apps',                     tag:'app',       status:'live',  meta:'HTML/JS · Italian · German',    url:'', desc:'Interactive language learning applications for Italian and German, built as standalone web tools.' },
-  { id:'dashboard', title:'Curley Effect',     titleEm:'Dashboard',                tag:'tool',      status:'live',  meta:'HTML · D3.js · 2025',           url:'', desc:'Interactive companion dashboard visualizing the Curley Vulnerability Index across states and time periods, including the Kitagawa decomposition and headline regression results.' },
+
+  { id:'opera',     title:'Opera',             titleEm:'Directory',                tag:'app',       status:'live',  meta:'Vercel · 2025',                 url:'https://opera-directory.vercel.app/', desc:'A comprehensive directory of opera companies and productions. An interactive web application reflecting deep interest in the operatic tradition.' },
+
+  { id:'marinepft', title:'Marine',             titleEm:'PFT Tracker',              tag:'tool',      status:'live',  meta:'Vercel · 2025',                 url:'https://marine-pft-tracker.vercel.app/', desc:'Physical fitness tracking tool built around the Marine Corps Physical Fitness Test standards. Tracks performance metrics and progress toward readiness benchmarks.' },
+  { id:'hegemonic2', title:'Hegemonic',        titleEm:'Framework',                tag:'research',  status:'live',  meta:'Vercel · 2025',                 url:'https://hegemonic-framework.vercel.app/', desc:'Theoretical paper exploring how the American alliance system creates systematic economic asymmetries. Integrates the Global Curley Vulnerability Index as part of a broader framework on hegemonic institutions.' },
+  { id:'curleymeasure', title:'Measuring the', titleEm:'Curley Effect',            tag:'research',  status:'live',  meta:'Vercel · 2025',                 url:'https://measuring-the-curley-effect.vercel.app/', desc:'Job market paper developing a Curley Vulnerability Index measuring U.S. states\' susceptibility to politicians using wasteful redistribution to reshape electorates through selective outmigration. State-level panel, 44 states × 5 elections, 2004–2020.' },
 ];
 
 // ─────────────────────────────────────
@@ -663,7 +669,28 @@ let currentFilter = 'all';
 function loadProjects() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      const savedIds = new Set(saved.map(p => p.id));
+      // Merge in any default projects not already in saved data
+      const merged = [...saved];
+      DEFAULTS.forEach(d => {
+        if (!savedIds.has(d.id)) merged.push({...d});
+      });
+      // Remove any projects whose id is no longer in DEFAULTS and has no url set
+      // (i.e. stale removed defaults — but keep user-added projects)
+      const defaultIds = new Set(DEFAULTS.map(d => d.id));
+      const cleaned = merged.filter(p => {
+        const isDefault = defaultIds.has(p.id);
+        const isUserAdded = p.id.startsWith('proj_');
+        // Keep user-added always; keep defaults only if still in DEFAULTS list
+        return isUserAdded || isDefault;
+      });
+      if (merged.length !== saved.length || cleaned.length !== merged.length) {
+        persist(cleaned);
+      }
+      return cleaned;
+    }
   } catch(e) {}
   return DEFAULTS.map(p => ({...p}));
 }
@@ -909,6 +936,13 @@ function esc(s) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 function escA(s) { return String(s ?? '').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+function resetToDefaults() {
+  if (!confirm('Reset all projects to defaults? This will discard any changes saved in this browser.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  renderGrid();
+  showToast('Reset to defaults');
+}
 
 // ─────────────────────────────────────
 //  INIT
