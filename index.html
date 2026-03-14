@@ -110,66 +110,9 @@
     align-items: center;
   }
 
-  /* ─── ADMIN BTN ─── */
-  .admin-btn {
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: transparent;
-    color: rgba(255,255,255,0.6);
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.2s;
-  }
-  .admin-btn:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
-  .admin-btn.logout { border-color: rgba(239,68,68,0.5); color: #fca5a5; }
-  .admin-btn.logout:hover { background: #ef4444; color: var(--white); border-color: #ef4444; }
+  
 
-  /* ─── ADMIN BANNER ─── */
-  .admin-banner {
-    display: none;
-    padding: 10px 0;
-    background: var(--amber-bg);
-    border-bottom: 1px solid #fde68a;
-  }
-  .admin-banner .wrap {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--amber);
-  }
-  .admin-banner .hint {
-    font-weight: 400;
-    color: #b45309;
-    opacity: 0.7;
-  }
-  body.admin-mode .admin-banner { display: block; }
-
-  .reset-btn {
-    margin-left: auto;
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border: 1px solid rgba(153,27,27,0.3);
-    background: transparent;
-    color: var(--red);
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.2s;
-  }
-  .reset-btn:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+  
 
   /* ─── MAIN ─── */
   main { padding: 40px 0 60px; }
@@ -214,13 +157,7 @@
     border-color: var(--navy);
     color: var(--white);
   }
-  .filter-btn.add-btn {
-    border-color: var(--green);
-    color: var(--green);
-    display: none;
-  }
-  .filter-btn.add-btn:hover { background: var(--green); color: var(--white); }
-  body.admin-mode .filter-btn.add-btn { display: inline-block; }
+
 
   /* ─── SECTION LABELS ─── */
   .section-label {
@@ -380,139 +317,19 @@
   .open-btn.no-url { border-color: var(--gray-4); color: var(--gray-4); }
   .open-btn.no-url:hover { background: transparent; color: var(--gray-4); cursor: default; }
 
-  .card-edit-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border: 1px solid var(--border);
-    background: var(--white);
-    color: var(--gray-3);
-    cursor: pointer;
-    border-radius: 3px;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.15s, color 0.15s, border-color 0.15s;
-  }
-  body.admin-mode .card-edit-btn { display: block; }
-  body.admin-mode .project-card:hover .card-edit-btn { opacity: 1; }
-  .card-edit-btn:hover { color: var(--navy); border-color: var(--navy); }
+
 
   /* ─── OVERLAY / MODAL ─── */
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(26,26,26,0.6);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s;
-    backdrop-filter: blur(3px);
-  }
-  .overlay.open { opacity: 1; pointer-events: all; }
 
-  .modal {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    width: min(560px, 92vw);
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 32px;
-    position: relative;
-    transform: translateY(18px);
-    transition: transform 0.25s;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-  }
-  .overlay.open .modal { transform: translateY(0); }
 
-  .modal-close {
-    position: absolute;
-    top: 12px; right: 16px;
-    background: none;
-    border: none;
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gray-3);
-    cursor: pointer;
-    padding: 4px 6px;
-  }
-  .modal-close:hover { color: var(--red); }
 
-  .modal-label {
-    display: block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gray-3);
-    margin-bottom: 4px;
-  }
 
-  .modal h2 {
-    font-family: 'Crimson Text', Georgia, serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 24px;
-    line-height: 1.2;
-  }
 
-  /* ─── FORM ─── */
-  .field { margin-bottom: 14px; }
-  .field label {
-    display: block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gray-3);
-    margin-bottom: 6px;
-  }
-  .field input,
-  .field textarea,
-  .field select {
-    width: 100%;
-    background: var(--gray-6);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 10px 12px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    color: var(--black);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .field input:focus,
-  .field textarea:focus,
-  .field select:focus { border-color: var(--navy); }
-  .field textarea { resize: vertical; min-height: 82px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
 
   .field input#fUrl { border-color: rgba(26,58,107,0.35); background: var(--navy-bg); }
   .field input#fUrl:focus { border-color: var(--navy); }
 
-  .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid var(--gray-5);
-  }
 
   .btn {
     font-family: 'Roboto', sans-serif;
@@ -534,19 +351,7 @@
   .btn.danger { border-color: rgba(153,27,27,0.4); color: var(--red); }
   .btn.danger:hover { background: var(--red); color: var(--white); border-color: var(--red); }
 
-  .form-msg {
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    padding: 8px 12px;
-    margin-bottom: 14px;
-    border-radius: 3px;
-    display: none;
-  }
-  .form-msg.error   { background: var(--red-bg); color: var(--red); border-left: 3px solid var(--red); }
-  .form-msg.success { background: var(--green-bg); color: var(--green); border-left: 3px solid var(--green); }
-  .form-msg.show    { display: block; }
+
 
   /* ─── FOOTER ─── */
   .site-footer {
@@ -590,20 +395,12 @@
     .wrap { padding: 0 20px; }
     .site-header { padding: 28px 0 24px; }
     .field-row { grid-template-columns: 1fr; }
-    .modal { padding: 24px 20px; }
-    .header-right { position: static; margin-top: 12px; }
+      .header-right { position: static; margin-top: 12px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ═══ ADMIN BANNER ═══ -->
-<div class="admin-banner">
-  <div class="wrap">
-    <span>⬡ Admin Mode</span>
-    <span class="hint">Hover any card to edit · Use + Add Project to create new</span>
-    <button class="reset-btn" onclick="resetToDefaults()">↺ Reset</button>
-  </div>
 </div>
 
 <!-- ═══ HEADER ═══ -->
@@ -613,9 +410,6 @@
       <div class="header-top">Portfolio — David</div>
       <h1>Works &amp; Projects</h1>
       <div class="header-sub">Research in political economy, formation software, interactive tools, and web applications.</div>
-      <div class="header-right">
-        <button class="admin-btn" id="adminToggleBtn" onclick="handleAdminBtn()">Admin</button>
-      </div>
     </div>
   </div>
 </header>
@@ -631,7 +425,6 @@
       <button class="filter-btn" onclick="filterCards('formation',this)">Formation</button>
       <button class="filter-btn" onclick="filterCards('tool',this)">Tools</button>
       <button class="filter-btn" onclick="filterCards('app',this)">Apps</button>
-      <button class="filter-btn add-btn" onclick="showAddModal()">+ Add Project</button>
     </div>
 
     <div id="gridContainer"></div>
@@ -651,84 +444,12 @@
 
 <div id="toast"></div>
 
-<!-- ════ OVERLAY: PASSWORD ════ -->
-<div class="overlay" id="passwordOverlay">
-  <div class="modal" style="width:min(400px,92vw)">
-    <button class="modal-close" onclick="closeOverlay('passwordOverlay')">Close ✕</button>
-    <span class="modal-label">Access Required</span>
-    <h2>Admin Login</h2>
-    <div class="form-msg error" id="pwError">Incorrect password — try again.</div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" id="pwInput" placeholder="Enter password"
-             onkeydown="if(event.key==='Enter') checkPassword()">
-    </div>
-    <div class="modal-actions">
-      <button class="btn" onclick="closeOverlay('passwordOverlay')">Cancel</button>
-      <button class="btn primary" onclick="checkPassword()">Unlock →</button>
-    </div>
-  </div>
 </div>
 
 <!-- ════ OVERLAY: ADD / EDIT PROJECT ════ -->
-<div class="overlay" id="projectOverlay">
-  <div class="modal">
-    <button class="modal-close" onclick="closeOverlay('projectOverlay')">Close ✕</button>
-    <span class="modal-label" id="modalModeLabel">New Project</span>
-    <h2 id="modalHeading">Add a Project</h2>
-    <div class="form-msg error" id="projError"></div>
-    <input type="hidden" id="editingId">
 
-    <div class="field">
-      <label>Title</label>
-      <input type="text" id="fTitle" placeholder="e.g. The Global Curley Effect">
-    </div>
-    <div class="field">
-      <label>Italic emphasis (optional — appears after main title)</label>
-      <input type="text" id="fTitleEm" placeholder="e.g. Curley Effect">
-    </div>
-    <div class="field">
-      <label>Description</label>
-      <textarea id="fDesc" placeholder="Brief description of the project..."></textarea>
-    </div>
-    <div class="field">
-      <label>URL</label>
-      <input type="url" id="fUrl" placeholder="https://your-project.vercel.app">
-    </div>
-    <div class="field-row">
-      <div class="field" style="margin-bottom:0">
-        <label>Category</label>
-        <select id="fTag">
-          <option value="research">Research</option>
-          <option value="formation">Formation</option>
-          <option value="tool">Tool</option>
-          <option value="app">App</option>
-        </select>
-      </div>
-      <div class="field" style="margin-bottom:0">
-        <label>Status</label>
-        <select id="fStatus">
-          <option value="live">Live</option>
-          <option value="wip">In Progress</option>
-          <option value="draft">Draft</option>
-        </select>
-      </div>
-    </div>
-    <div class="field" style="margin-top:14px">
-      <label>Meta (stack, year, etc.)</label>
-      <input type="text" id="fMeta" placeholder="e.g. HTML · Vercel · 2025">
-    </div>
-
-    <div class="modal-actions">
-      <button class="btn danger" id="deleteBtn" onclick="deleteProject()" style="display:none;margin-right:auto">Delete</button>
-      <button class="btn" onclick="closeOverlay('projectOverlay')">Cancel</button>
-      <button class="btn primary" onclick="saveProject()">Save →</button>
-    </div>
-  </div>
-</div>
 
 <script>
-const ADMIN_PASSWORD = 'BMW1150gs!';
 const STORAGE_KEY    = 'portfolio_v3';
 
 const DEFAULTS = [
@@ -751,7 +472,6 @@ const CATEGORY_LABELS = {
   app:       'Applications',
 };
 
-let adminUnlocked = false;
 let currentFilter = 'all';
 
 function loadProjects() {
@@ -856,7 +576,6 @@ function createCard(p, num) {
   card.dataset.tag = p.tag;
 
   card.innerHTML = `
-    <button class="card-edit-btn" onclick="showEditModal('${escA(p.id)}')">Edit</button>
     <div class="card-top">
       <span class="card-number">${String(num).padStart(2,'0')}</span>
       <span class="card-badge ${badgeClass}">${esc(tagLabel)}</span>
@@ -870,7 +589,7 @@ function createCard(p, num) {
       </div>
       ${hasUrl
         ? `<a href="${escA(p.url)}" class="open-btn" target="_blank" rel="noopener">Open →</a>`
-        : `<a href="#" class="open-btn no-url" onclick="noUrl(event,'${escA(p.id)}')">Open →</a>`
+        : ''
       }
     </div>`;
 
@@ -883,148 +602,13 @@ function statusLabel(s) {
 
 function filterCards(tag, btn) {
   currentFilter = tag;
-  document.querySelectorAll('.filter-btn:not(.add-btn)').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderGrid();
 }
 
-function handleAdminBtn() {
-  if (adminUnlocked) { logoutAdmin(); } else { showPasswordModal(); }
-}
-
-function showPasswordModal() {
-  document.getElementById('pwInput').value = '';
-  document.getElementById('pwError').classList.remove('show');
-  openOverlay('passwordOverlay');
-  setTimeout(() => document.getElementById('pwInput').focus(), 280);
-}
-
-function checkPassword() {
-  const val = document.getElementById('pwInput').value;
-  if (val === ADMIN_PASSWORD) {
-    closeOverlay('passwordOverlay');
-    unlockAdmin();
-  } else {
-    document.getElementById('pwError').classList.add('show');
-    document.getElementById('pwInput').value = '';
-    document.getElementById('pwInput').focus();
-    setTimeout(() => document.getElementById('pwError').classList.remove('show'), 3500);
-  }
-}
-
-function unlockAdmin() {
-  adminUnlocked = true;
-  document.body.classList.add('admin-mode');
-  const btn = document.getElementById('adminToggleBtn');
-  btn.textContent = 'Logout';
-  btn.classList.add('logout');
-  showToast('Admin mode active');
-}
-
-function logoutAdmin() {
-  adminUnlocked = false;
-  document.body.classList.remove('admin-mode');
-  const btn = document.getElementById('adminToggleBtn');
-  btn.textContent = 'Admin';
-  btn.classList.remove('logout');
-  showToast('Logged out');
-}
-
-function showAddModal() {
-  if (!adminUnlocked) return;
-  clearForm();
-  document.getElementById('modalModeLabel').textContent = 'New Project';
-  document.getElementById('modalHeading').textContent = 'Add a Project';
-  document.getElementById('editingId').value = '';
-  document.getElementById('deleteBtn').style.display = 'none';
-  openOverlay('projectOverlay');
-  setTimeout(() => document.getElementById('fTitle').focus(), 280);
-}
-
-function showEditModal(id) {
-  if (!adminUnlocked) return;
-  const p = loadProjects().find(x => x.id === id);
-  if (!p) return;
-  clearForm();
-  document.getElementById('modalModeLabel').textContent = 'Edit Project';
-  document.getElementById('modalHeading').textContent = 'Edit Project';
-  document.getElementById('editingId').value  = id;
-  document.getElementById('fTitle').value     = p.title   || '';
-  document.getElementById('fTitleEm').value   = p.titleEm || '';
-  document.getElementById('fDesc').value      = p.desc    || '';
-  document.getElementById('fUrl').value       = p.url     || '';
-  document.getElementById('fTag').value       = p.tag     || 'research';
-  document.getElementById('fStatus').value    = p.status  || 'live';
-  document.getElementById('fMeta').value      = p.meta    || '';
-  document.getElementById('deleteBtn').style.display = 'inline-block';
-  openOverlay('projectOverlay');
-  setTimeout(() => document.getElementById('fUrl').focus(), 280);
-}
-
-function clearForm() {
-  ['fTitle','fTitleEm','fDesc','fUrl','fMeta'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('fTag').value    = 'research';
-  document.getElementById('fStatus').value = 'live';
-  document.getElementById('projError').classList.remove('show');
-}
-
-function saveProject() {
-  const title = document.getElementById('fTitle').value.trim();
-  if (!title) { showFormMsg('projError', 'A title is required.'); return; }
-
-  const projects   = loadProjects();
-  const editingId  = document.getElementById('editingId').value;
-
-  const entry = {
-    id:      editingId || ('proj_' + Date.now()),
-    title,
-    titleEm: document.getElementById('fTitleEm').value.trim(),
-    desc:    document.getElementById('fDesc').value.trim(),
-    url:     document.getElementById('fUrl').value.trim(),
-    tag:     document.getElementById('fTag').value,
-    status:  document.getElementById('fStatus').value,
-    meta:    document.getElementById('fMeta').value.trim(),
-  };
-
-  if (editingId) {
-    const idx = projects.findIndex(p => p.id === editingId);
-    if (idx !== -1) projects[idx] = entry; else projects.push(entry);
-  } else {
-    projects.push(entry);
-  }
-
-  persist(projects);
-  renderGrid();
-  closeOverlay('projectOverlay');
-  showToast(editingId ? 'Project updated' : 'Project added');
-}
-
-function deleteProject() {
-  const editingId = document.getElementById('editingId').value;
-  if (!editingId) return;
-  persist(loadProjects().filter(p => p.id !== editingId));
-  renderGrid();
-  closeOverlay('projectOverlay');
-  showToast('Project deleted');
-}
-
-function openOverlay(id)  { document.getElementById(id).classList.add('open'); }
-function closeOverlay(id) { document.getElementById(id).classList.remove('open'); }
-
-document.querySelectorAll('.overlay').forEach(ov => {
-  ov.addEventListener('click', e => { if (e.target === ov) closeOverlay(ov.id); });
 });
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape')
-    document.querySelectorAll('.overlay.open').forEach(ov => closeOverlay(ov.id));
-});
-
-function noUrl(e, id) {
-  e.preventDefault();
-  if (adminUnlocked) { showEditModal(id); }
-  else { showToast('No URL set'); }
-}
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1038,13 +622,6 @@ function showToast(msg) {
   }, 2800);
 }
 
-function showFormMsg(id, msg) {
-  const el = document.getElementById(id);
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 4000);
-}
-
 function esc(s) {
   return String(s ?? '')
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
@@ -1052,14 +629,9 @@ function esc(s) {
 }
 function escA(s) { return String(s ?? '').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-function resetToDefaults() {
-  if (!confirm('Reset all projects to defaults? This will discard any changes saved in this browser.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  renderGrid();
-  showToast('Reset to defaults');
-}
-
 renderGrid();
 </script>
 </body>
 </html>
+
+
