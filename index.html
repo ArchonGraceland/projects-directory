@@ -102,17 +102,6 @@
   .header-inner {
     position: relative;
   }
-  .header-right {
-    position: absolute;
-    top: 0; right: 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  
-
-  
 
   /* ─── MAIN ─── */
   main { padding: 40px 0 60px; }
@@ -157,7 +146,6 @@
     border-color: var(--navy);
     color: var(--white);
   }
-
 
   /* ─── SECTION LABELS ─── */
   .section-label {
@@ -314,43 +302,6 @@
     display: inline-block;
   }
   .open-btn:hover { background: var(--navy); color: var(--white); }
-  .open-btn.no-url { border-color: var(--gray-4); color: var(--gray-4); }
-  .open-btn.no-url:hover { background: transparent; color: var(--gray-4); cursor: default; }
-
-
-
-  /* ─── OVERLAY / MODAL ─── */
-
-
-
-
-
-
-
-  .field input#fUrl { border-color: rgba(26,58,107,0.35); background: var(--navy-bg); }
-  .field input#fUrl:focus { border-color: var(--navy); }
-
-
-  .btn {
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 8px 20px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--gray-2);
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.2s;
-  }
-  .btn:hover { border-color: var(--gray-2); color: var(--black); }
-  .btn.primary { border-color: var(--navy); color: var(--navy); }
-  .btn.primary:hover { background: var(--navy); color: var(--white); }
-  .btn.danger { border-color: rgba(153,27,27,0.4); color: var(--red); }
-  .btn.danger:hover { background: var(--red); color: var(--white); border-color: var(--red); }
-
 
 
   /* ─── FOOTER ─── */
@@ -394,14 +345,10 @@
     .project-grid { grid-template-columns: 1fr; }
     .wrap { padding: 0 20px; }
     .site-header { padding: 28px 0 24px; }
-    .field-row { grid-template-columns: 1fr; }
-      .header-right { position: static; margin-top: 12px; }
   }
 </style>
 </head>
 <body>
-
-</div>
 
 <!-- ═══ HEADER ═══ -->
 <header class="site-header">
@@ -444,13 +391,8 @@
 
 <div id="toast"></div>
 
-</div>
-
-<!-- ════ OVERLAY: ADD / EDIT PROJECT ════ -->
-
-
 <script>
-const STORAGE_KEY    = 'portfolio_v3';
+const STORAGE_KEY    = 'portfolio_v4';
 
 const DEFAULTS = [
   { id:'hamsterwheel', title:'Exit the',        titleEm:'Hamster Wheel',            tag:'formation', status:'live',  meta:'Vercel · 2025',                 url:'https://un-programmed-mind.vercel.app/', desc:'A 40-day program designed to break ingrained mental habits and cultivate a deliberately structured, unprogrammed mind. Practical formation for escaping reactive patterns and building intentional living.' },
@@ -462,6 +404,7 @@ const DEFAULTS = [
   { id:'marinepft', title:'Marine',             titleEm:'PFT Tracker',              tag:'tool',      status:'live',  meta:'Vercel · 2025',                 url:'https://marine-pft-tracker.vercel.app/', desc:'Physical fitness tracking tool built around the Marine Corps Physical Fitness Test standards. Tracks performance metrics and progress toward readiness benchmarks.' },
   { id:'mindload',  title:'MindLoad',           titleEm:'Catholic Formation',       tag:'formation', status:'live',  meta:'HTML · Sessions A–W · 2024–25', url:'https://mindload-new.vercel.app/', desc:'Comprehensive integral development program combining physical training (BJJ, resistance), cognitive disciplines (rhetoric, legal reasoning, music, language), and spiritual formation structured around the liturgical year.' },
   { id:'marketsdash', title:'Markets',          titleEm:'Dashboard',                tag:'research',  status:'live',  meta:'Finnhub API · Vercel · 2025',   url:'https://markets-dashboard-phi.vercel.app/', desc:'Real-time financial markets dashboard tracking equities, volatility, treasuries, and commodities with live data via Finnhub. Includes central bank policy rate monitoring for the Fed, ECB, and other major institutions.' },
+  { id:'composers',  title:'Composers',         titleEm:'Directory',                tag:'app',       status:'live',  meta:'Vercel · 2025',                 url:'https://composers-directory.vercel.app/', desc:'An interactive directory of classical composers, exploring their works, eras, and contributions to the Western musical tradition.' },
 ];
 
 const CATEGORY_ORDER = ['research', 'formation', 'tool', 'app'];
@@ -607,9 +550,6 @@ function filterCards(tag, btn) {
   renderGrid();
 }
 
-});
-
-
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -633,5 +573,3 @@ renderGrid();
 </script>
 </body>
 </html>
-
-
