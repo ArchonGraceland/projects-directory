@@ -383,8 +383,7 @@
       <button class="filter-btn active" onclick="filterCards('all',this)">All</button>
       <button class="filter-btn" onclick="filterCards('research',this)">Research</button>
       <button class="filter-btn" onclick="filterCards('formation',this)">Formation</button>
-      <button class="filter-btn" onclick="filterCards('tool',this)">Tools</button>
-      <button class="filter-btn" onclick="filterCards('app',this)">Apps</button>
+      <button class="filter-btn" onclick="filterCards('app',this)">Reference Tools</button>
     </div>
 
     <div id="gridContainer"></div>
@@ -416,18 +415,17 @@ const DEFAULTS = [
   { id:'opera',     title:'Opera',              titleEm:'Directory',                tag:'app',       status:'live',  meta:'2025',                 url:'https://opera-directory.vercel.app/', desc:'A comprehensive directory of opera companies and productions. An interactive web application reflecting deep interest in the operatic tradition.' },
   { id:'marinepft', title:'Marine',             titleEm:'PFT Tracker',              tag:'formation', status:'live',  meta:'2025',                 url:'https://marine-pft-tracker.vercel.app/', desc:'Physical fitness tracking tool built around the Marine Corps Physical Fitness Test standards. Tracks performance metrics and progress toward readiness benchmarks.' },
   { id:'mindload',  title:'MindLoad',           titleEm:'Catholic Formation',       tag:'formation', status:'live',  meta:'Sessions A–W · 2024–25', url:'https://mindload-new.vercel.app/', desc:'Comprehensive integral development program combining physical training (BJJ, resistance), cognitive disciplines (rhetoric, legal reasoning, music, language), and spiritual formation structured around the liturgical year.' },
-  { id:'marketsdash', title:'Markets',          titleEm:'Dashboard',                tag:'tool',      status:'live',  meta:'2025',   url:'https://markets-dashboard-phi.vercel.app/', desc:'Real-time financial markets dashboard tracking equities, volatility, treasuries, and commodities with live data via Finnhub. Includes central bank policy rate monitoring for the Fed, ECB, and other major institutions.' },
+  { id:'marketsdash', title:'Markets',          titleEm:'Dashboard',                tag:'app',       status:'live',  meta:'2025',   url:'https://markets-dashboard-phi.vercel.app/', desc:'Real-time financial markets dashboard tracking equities, volatility, treasuries, and commodities with live data via Finnhub. Includes central bank policy rate monitoring for the Fed, ECB, and other major institutions.' },
   { id:'composers',  title:'Composers',         titleEm:'Directory',                tag:'app',       status:'live',  meta:'2025',                 url:'https://composers-directory.vercel.app/', desc:'An interactive directory of classical composers, exploring their works, eras, and contributions to the Western musical tradition.' },
   { id:'expfirst',  title:'Experiment-First',  titleEm:'Curriculum',               tag:'formation', status:'wip',   meta:'2026',           url:'https://archongraceland.github.io/experiment-first-curriculum/', desc:'An experiment-first science curriculum spanning 80 modules across physics, chemistry, biology, earth & space, and health science. Includes AI-powered research report tooling, scaffolded assessment, and a self-improvement-through-science health strand.' },
   { id:'thecanon',  title:'The',               titleEm:'Canon',                    tag:'app',       status:'live',  meta:'2025',     url:'https://www.sacrumimperium.com/', desc:'A curated reference of 307 essential figures in Western high culture — from Homer to Stravinsky. Spans literature, philosophy, visual arts, and music across twenty-seven centuries, 800 BC to 1920.' },
   { id:'flourishing', title:'Flourishing Life', titleEm:'Year Index',              tag:'research',  status:'live',  meta:'2026',     url:'https://www.flourishinglifeyear.com/', desc:'A new measure of the American good life across five domains — purchasing power, wealth, family, health, and useful education. Built on open federal data with county-level assessments, national trends, and a personal self-assessment tool. Fully transparent and reproducible.' },
 ];
 
-const CATEGORY_ORDER = ['research', 'formation', 'tool', 'app'];
+const CATEGORY_ORDER = ['research', 'formation', 'app'];
 const CATEGORY_LABELS = {
   research:  'Research',
   formation: 'Formation',
-  tool:      'Tools',
   app:       'Reference Tools',
 };
 
