@@ -28,8 +28,6 @@
     --blue-bg:     #eff6ff;
     --amber:       #92400e;
     --amber-bg:    #fffbeb;
-    --teal:        #115e59;
-    --teal-bg:     #f0fdfa;
     --purple:      #5b21b6;
     --purple-bg:   #f5f3ff;
     --crimson:     #9f1239;
@@ -184,7 +182,6 @@
   }
   .project-card[data-tag="research"]::before  { background: var(--crimson); }
   .project-card[data-tag="formation"]::before { background: var(--amber); }
-  .project-card[data-tag="tool"]::before      { background: var(--teal); }
   .project-card[data-tag="app"]::before       { background: var(--blue); }
 
   .card-top {
@@ -211,7 +208,6 @@
   }
   .badge-research  { background: var(--crimson-bg); color: var(--crimson); }
   .badge-formation { background: var(--amber-bg);   color: var(--amber); }
-  .badge-tool      { background: var(--teal-bg);    color: var(--teal); }
   .badge-app       { background: var(--blue-bg);    color: var(--blue); }
 
   .card-title {
@@ -330,29 +326,6 @@
     border-color: rgba(255,255,255,0.5);
   }
 
-  /* ─── TOAST ─── */
-  #toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(16px);
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 10px 20px;
-    border-radius: 3px;
-    border-left: 3px solid var(--navy);
-    opacity: 0;
-    transition: all 0.3s;
-    pointer-events: none;
-    z-index: 9998;
-    box-shadow: var(--shadow-md);
-  }
-
   /* ─── RESPONSIVE ─── */
   @media (max-width: 800px) {
     .project-grid { grid-template-columns: 1fr; }
@@ -401,12 +374,8 @@
   </div>
 </footer>
 
-<div id="toast"></div>
-
 <script>
-const STORAGE_KEY    = 'portfolio_v7';
-
-const DEFAULTS = [
+const PROJECTS = [
   { id:'hamsterwheel', title:'Exit the',        titleEm:'Hamster Wheel',            tag:'formation', status:'live',  meta:'2025',                 url:'https://un-programmed-mind.vercel.app/', desc:'A 40-day program designed to break ingrained mental habits and cultivate a deliberately structured, unprogrammed mind. Practical formation for escaping reactive patterns and building intentional living.' },
   { id:'properreader', title:'A Proper',        titleEm:'Reader',                   tag:'formation', status:'live',  meta:'2025',                 url:'https://a-proper-reader.vercel.app/', desc:'A focused reading application with adjustable text size, annotation, inline definitions, and chapter navigation. Built for deep, distraction-free engagement with serious texts.' },
   { id:'hegemonic2', title:'Hegemonic',         titleEm:'Framework',                tag:'research',  status:'live',  meta:'2025',                 url:'https://hegemonic-framework.vercel.app/', desc:'Theoretical paper exploring how the American alliance system creates systematic economic asymmetries. Integrates the Global Curley Vulnerability Index as part of a broader framework on hegemonic institutions.' },
@@ -432,44 +401,14 @@ const CATEGORY_LABELS = {
 
 let currentFilter = 'all';
 
-function loadProjects() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const saved = JSON.parse(raw);
-      const savedIds = new Set(saved.map(p => p.id));
-      const merged = [...saved];
-      DEFAULTS.forEach(d => {
-        if (!savedIds.has(d.id)) merged.push({...d});
-      });
-      const defaultIds = new Set(DEFAULTS.map(d => d.id));
-      const cleaned = merged.filter(p => {
-        const isDefault = defaultIds.has(p.id);
-        const isUserAdded = p.id.startsWith('proj_');
-        return isUserAdded || isDefault;
-      });
-      if (merged.length !== saved.length || cleaned.length !== merged.length) {
-        persist(cleaned);
-      }
-      return cleaned;
-    }
-  } catch(e) {}
-  return DEFAULTS.map(p => ({...p}));
-}
-
-function persist(projects) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
-}
-
 function renderGrid() {
-  const projects = loadProjects();
   const container = document.getElementById('gridContainer');
   container.innerHTML = '';
 
   if (currentFilter === 'all') {
     let globalIdx = 0;
     CATEGORY_ORDER.forEach(cat => {
-      const items = projects.filter(p => p.tag === cat);
+      const items = PROJECTS.filter(p => p.tag === cat);
       if (items.length === 0) return;
 
       const label = document.createElement('div');
@@ -485,24 +424,8 @@ function renderGrid() {
       });
       container.appendChild(grid);
     });
-
-    const standardTags = new Set(CATEGORY_ORDER);
-    const extras = projects.filter(p => p.id.startsWith('proj_') && !standardTags.has(p.tag));
-    if (extras.length) {
-      const label = document.createElement('div');
-      label.className = 'section-label';
-      label.textContent = 'Other';
-      container.appendChild(label);
-      const grid = document.createElement('div');
-      grid.className = 'project-grid';
-      extras.forEach(p => {
-        globalIdx++;
-        grid.appendChild(createCard(p, globalIdx));
-      });
-      container.appendChild(grid);
-    }
   } else {
-    const items = projects.filter(p => p.tag === currentFilter);
+    const items = PROJECTS.filter(p => p.tag === currentFilter);
     if (items.length) {
       const label = document.createElement('div');
       label.className = 'section-label';
@@ -562,18 +485,6 @@ function filterCards(tag, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderGrid();
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.style.opacity = '1';
-  t.style.transform = 'translateX(-50%) translateY(0)';
-  clearTimeout(window._tt);
-  window._tt = setTimeout(() => {
-    t.style.opacity = '0';
-    t.style.transform = 'translateX(-50%) translateY(16px)';
-  }, 2800);
 }
 
 function esc(s) {
